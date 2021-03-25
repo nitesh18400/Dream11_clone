@@ -256,6 +256,13 @@ class _MyCardState extends State<MyCard> {
               ),
             );
           } else {
+            // matchdata.data['matches'].sort((a, b) {
+            //   if ((a) < (b)) {
+            //     return a;
+            //   } else {
+            //     return b;
+            //   }
+            // });
             return Container(
               color: Colors.grey.shade100,
               child: Padding(
@@ -268,8 +275,13 @@ class _MyCardState extends State<MyCard> {
                       String t2 = matchdata.data['matches'][index]['team2'];
                       String t1fl = 'images/' + t1 + '.png';
                       String t2fl = 'images/' + t2 + '.png';
+                      // print(matchdata.data['matches']);
+                      List<dynamic> matchdatax = matchdata.data['matches'];
+                      matchdatax.sort(
+                          (a, b) => a['startdate'].compareTo(b['startdate']));
+                      // print(matchdatax);
                       var local = DateTime.fromMillisecondsSinceEpoch(x);
-                      print(x.runtimeType);
+                      // print(x.runtimeType);
                       return Card(
                         child: Container(
                           height: 130,
@@ -280,9 +292,7 @@ class _MyCardState extends State<MyCard> {
                               children: [
                                 Center(
                                   child: Text(
-                                    "IPL Match " +
-                                        matchdata.data['matches'][index]
-                                            ['match'],
+                                    "IPL Match " + matchdatax[index]['match'],
                                     style: TextStyle(color: Colors.grey),
                                   ),
                                 ),
@@ -334,7 +344,7 @@ class _MyCardState extends State<MyCard> {
                                   height: 40,
                                   width: 40,
                                 ),
-                                Text(matchdata.data['matches'][index]['team1']),
+                                Text(matchdatax[index]['team1']),
                               ],
                             ),
                             trailing: Column(
@@ -344,7 +354,7 @@ class _MyCardState extends State<MyCard> {
                                   height: 40,
                                   width: 40,
                                 ),
-                                Text(matchdata.data['matches'][index]['team2'])
+                                Text(matchdatax[index]['team2'])
                               ],
                             ),
                           ),
